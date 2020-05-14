@@ -1,7 +1,9 @@
 import React from "react";
-import "semantic-ui-css/semantic.min.css";
 import { Form, TextArea } from "semantic-ui-react";
 import bech32 from "bech32";
+
+import "semantic-ui-css/semantic.min.css";
+import "./App.css";
 
 class App extends React.Component {
   constructor(props) {
