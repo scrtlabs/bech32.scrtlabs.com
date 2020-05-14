@@ -1,10 +1,9 @@
-import React, { Component } from "react";
-import "./App.css";
+import React from "react";
 import "semantic-ui-css/semantic.min.css";
 import { Form, TextArea } from "semantic-ui-react";
 import bech32 from "bech32";
 
-class App extends Component {
+class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -13,20 +12,8 @@ class App extends Component {
   }
 
   render() {
-    const placeholder = JSON.stringify(
-      {
-        name: "example",
-        type: "local",
-        address: "enigma1pnsceh64jyrsfwjd2k865eetmsgg5grw8sma87",
-        pubkey:
-          "enigmapub1addwnpepqgauy23vhvvr8uezgczuzh7lj64r9ahd4vsshz5fksezk5lw5k6swjskux6",
-      },
-      null,
-      4
-    );
-
     return (
-      <div className="App">
+      <div>
         <Form style={{ display: "flex" }}>
           <TextArea
             onChange={(event, data) => {
@@ -64,5 +51,17 @@ function convert(input) {
 
   return output;
 }
+
+const placeholder = JSON.stringify(
+  {
+    name: "example",
+    type: "local",
+    address: "enigma1pnsceh64jyrsfwjd2k865eetmsgg5grw8sma87",
+    pubkey:
+      "enigmapub1addwnpepqgauy23vhvvr8uezgczuzh7lj64r9ahd4vsshz5fksezk5lw5k6swjskux6",
+  },
+  null,
+  4
+);
 
 export default App;
