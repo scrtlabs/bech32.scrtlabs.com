@@ -47,6 +47,11 @@ function convert(input) {
       const newAddress = bech32.encode(newPrefix, canonical.words);
       output = output.replace(new RegExp(oldAddress, "g"), newAddress);
     } catch (error) {
+      output = output.replace(
+        new RegExp(oldAddress, "g"),
+        `||| ${oldAddress} ||| <-- ERROR PARSING THIS ADDRESS!`
+      );
+
       console.error(error.message);
     }
   }
