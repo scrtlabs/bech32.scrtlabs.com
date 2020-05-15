@@ -51,8 +51,7 @@ class App extends React.Component {
 }
 
 const regexCache = {};
-
-function convert(input, from, to) {
+function convert(input = "", from, to) {
   from = from || "enigma";
   to = to || "secret";
 
