@@ -10,10 +10,13 @@ class App extends React.Component {
     super(props);
     this.state = {
       input: "",
+      from: "enigma",
+      to: "secret",
     };
   }
 
   render() {
+    const placeholder = getPlaceholder(this.state.from);
     return (
       <div>
         <Form style={{ display: "flex" }}>
@@ -25,8 +28,12 @@ class App extends React.Component {
             style={{ height: "100vh" }}
           />
           <TextArea
-            value={convert(this.state.input)}
-            placeholder={convert(placeholder)}
+            value={convert(this.state)}
+            placeholder={convert({
+              input: placeholder,
+              from: this.state.from,
+              to: this.state.to,
+            })}
             style={{ height: "100vh" }}
           />
         </Form>
@@ -35,15 +42,18 @@ class App extends React.Component {
   }
 }
 
-const regex = /enigma(pub|valoper|valoperpub|valcons|valconspub)?1[a-z0-9]+?\b/g;
-function convert(input) {
+function convert({ input, from, to }) {
+  const regex = new RegExp(
+    `${from}(pub|valoper|valoperpub|valcons|valconspub)?1[a-z0-9]+\\b`,
+    "g"
+  );
   let output = input;
   const matches = input.match(regex) || [];
 
   for (const oldAddress of matches) {
     try {
       const canonical = bech32.decode(oldAddress);
-      const newPrefix = canonical.prefix.replace("enigma", "secret");
+      const newPrefix = canonical.prefix.replace(from, to);
       const newAddress = bech32.encode(newPrefix, canonical.words);
       output = output.replace(new RegExp(oldAddress, "g"), newAddress);
     } catch (error) {
@@ -59,16 +69,17 @@ function convert(input) {
   return output;
 }
 
-const placeholder = JSON.stringify(
-  {
-    name: "example",
-    type: "local",
-    address: "enigma1pnsceh64jyrsfwjd2k865eetmsgg5grw8sma87",
-    pubkey:
-      "enigmapub1addwnpepqgauy23vhvvr8uezgczuzh7lj64r9ahd4vsshz5fksezk5lw5k6swjskux6",
-  },
-  null,
-  4
-);
+function getPlaceholder(from) {
+  return JSON.stringify(
+    {
+      name: "example",
+      type: "local",
+      address: `${from}1pnsceh64jyrsfwjd2k865eetmsgg5grw8sma87`,
+      pubkey: `${from}pub1addwnpepqgauy23vhvvr8uezgczuzh7lj64r9ahd4vsshz5fksezk5lw5k6swjskux6`,
+    },
+    null,
+    4
+  );
+}
 
 export default App;
