@@ -42,11 +42,17 @@ class App extends React.Component {
   }
 }
 
+const regexCache = {};
+
 function convert({ input, from, to }) {
-  const regex = new RegExp(
-    `${from}(pub|valoper|valoperpub|valcons|valconspub)?1[a-z0-9]+\\b`,
-    "g"
-  );
+  if (!regexCache[from]) {
+    regexCache[from] = new RegExp(
+      `${from}(pub|valoper|valoperpub|valcons|valconspub)?1[a-z0-9]+\\b`,
+      "g"
+    );
+  }
+  const regex = regexCache[from];
+
   let output = input;
   const matches = input.match(regex) || [];
 
@@ -57,10 +63,9 @@ function convert({ input, from, to }) {
       const newAddress = bech32.encode(newPrefix, canonical.words);
       output = output.replace(new RegExp(oldAddress, "g"), newAddress);
     } catch (error) {
-      output = output.replace(
-        new RegExp(oldAddress, "g"),
-        `||| ${oldAddress} ||| <-- ERROR PARSING THIS ADDRESS!`
-      );
+      output = output
+        .split(oldAddress)
+        .join(`||| ${oldAddress} ||| <-- ERROR PARSING THIS ADDRESS!`);
 
       console.error(error.message);
     }
