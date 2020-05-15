@@ -23,13 +23,13 @@ class App extends React.Component {
           <Input
             value={this.state.from}
             placeholder="from: enigma"
-            style={{ padding: "10px" }}
+            style={{ padding: "10px", flex: 1 }}
             onChange={(_, { value }) => this.setState({ from: value })}
           />
           <Input
             value={this.state.to}
             placeholder="to: secret"
-            style={{ padding: "10px" }}
+            style={{ padding: "10px", flex: 1 }}
             onChange={(_, { value }) => this.setState({ to: value })}
           />
         </Form>
