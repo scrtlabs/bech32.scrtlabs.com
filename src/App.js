@@ -23,13 +23,13 @@ class App extends React.Component {
           <Input
             value={this.state.from}
             placeholder="from: enigma"
-            style={{ padding: "10px", flex: 1 }}
+            style={{ padding: "0.4%", flex: 1 }}
             onChange={(_, { value }) => this.setState({ from: value })}
           />
           <Input
             value={this.state.to}
             placeholder="to: secret"
-            style={{ padding: "10px", flex: 1 }}
+            style={{ padding: "0.4%", flex: 1 }}
             onChange={(_, { value }) => this.setState({ to: value })}
           />
         </Form>
@@ -37,12 +37,12 @@ class App extends React.Component {
           <TextArea
             onChange={(_, { value }) => this.setState({ input: value })}
             placeholder={placeholder}
-            style={{ padding: "10px" }}
+            style={{ margin: "0.4%" }}
           />
           <TextArea
             value={convert(this.state.input, this.state.from, this.state.to)}
             placeholder={convert(placeholder, this.state.from, this.state.to)}
-            style={{ padding: "10px" }}
+            style={{ margin: "0.4%" }}
           />
         </Form>
       </div>
