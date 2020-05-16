@@ -38,7 +38,7 @@ class App extends React.Component {
           />
         </Form>
         <Form
-          style={{ display: "flex", height: "calc(100vh - (4em + 1.3em))" }}
+          style={{ display: "flex", height: "calc(100vh - (4em + 1.35em))" }}
         >
           <TextArea
             onChange={(_, { value }) => this.setState({ input: value })}
@@ -53,7 +53,7 @@ class App extends React.Component {
         </Form>
         <div
           style={{
-            height: "1.3em",
+            height: "1.35em",
             width: "100%",
             backgroundColor: "#e7e7e7",
             color: "black",
