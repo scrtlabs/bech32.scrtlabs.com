@@ -63,7 +63,7 @@ class App extends React.Component {
             bottom: 0,
           }}
         >
-          Made with <span style={{ fontSize: "large", color: "red" }}>♥</span>{" "}
+          Made with <Icon style={{ color: "red" }} name="heart" />
           by Team Enigma{" "}
           <a
             href="https://github.com/enigmampc/Bech32Converter"
