@@ -24,13 +24,17 @@ class App extends React.Component {
             value={this.state.from}
             placeholder="from: enigma"
             style={{ padding: "0.4%", flex: 1 }}
-            onChange={(_, { value }) => this.setState({ from: value })}
+            onChange={(_, { value }) =>
+              this.setState({ from: value.toLowerCase() })
+            }
           />
           <Input
             value={this.state.to}
             placeholder="to: secret"
             style={{ padding: "0.4%", flex: 1 }}
-            onChange={(_, { value }) => this.setState({ to: value })}
+            onChange={(_, { value }) =>
+              this.setState({ to: value.toLowerCase() })
+            }
           />
         </Form>
         <Form style={{ display: "flex", height: "92vh" }}>
