@@ -1,5 +1,5 @@
 import React from "react";
-import { Form, TextArea, Input } from "semantic-ui-react";
+import { Form, TextArea, Input, Icon } from "semantic-ui-react";
 import bech32 from "bech32";
 
 import "semantic-ui-css/semantic.min.css";
@@ -19,7 +19,7 @@ class App extends React.Component {
     const placeholder = getPlaceholder(this.state.from);
     return (
       <div>
-        <Form style={{ display: "flex", height: "8vh" }}>
+        <Form style={{ display: "flex", height: "4em" }}>
           <Input
             value={this.state.from}
             placeholder="from: enigma"
@@ -37,18 +37,42 @@ class App extends React.Component {
             }
           />
         </Form>
-        <Form style={{ display: "flex", height: "92vh" }}>
+        <Form
+          style={{ display: "flex", height: "calc(100vh - (4em + 1.3em))" }}
+        >
           <TextArea
             onChange={(_, { value }) => this.setState({ input: value })}
             placeholder={placeholder}
-            style={{ margin: "0.4%" }}
+            style={{ margin: "0.4%", marginBottom: "0.6%" }}
           />
           <TextArea
             value={convert(this.state.input, this.state.from, this.state.to)}
             placeholder={convert(placeholder, this.state.from, this.state.to)}
-            style={{ margin: "0.4%" }}
+            style={{ margin: "0.4%", marginBottom: "0.6%" }}
           />
         </Form>
+        <div
+          style={{
+            height: "1.3em",
+            width: "100%",
+            backgroundColor: "#e7e7e7",
+            color: "black",
+            textAlign: "center",
+            position: "fixed",
+            left: 0,
+            bottom: 0,
+          }}
+        >
+          Made with <span style={{ fontSize: "large", color: "red" }}>♥</span>{" "}
+          by Team Enigma{" "}
+          <a
+            href="https://github.com/enigmampc/Bech32Converter"
+            target="_blank"
+            style={{ color: "black" }}
+          >
+            <Icon name="github" />
+          </a>
+        </div>
       </div>
     );
   }
