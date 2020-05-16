@@ -43,12 +43,12 @@ class App extends React.Component {
           <TextArea
             onChange={(_, { value }) => this.setState({ input: value })}
             placeholder={placeholder}
-            style={{ margin: "0.4%", marginBottom: "0.6%" }}
+            style={{ margin: "0.4%", marginBottom: "0.8%" }}
           />
           <TextArea
             value={convert(this.state.input, this.state.from, this.state.to)}
             placeholder={convert(placeholder, this.state.from, this.state.to)}
-            style={{ margin: "0.4%", marginBottom: "0.6%" }}
+            style={{ margin: "0.4%", marginBottom: "0.8%" }}
           />
         </Form>
         <div
