@@ -68,6 +68,7 @@ class App extends React.Component {
           <a
             href="https://github.com/enigmampc/Bech32Converter"
             target="_blank"
+            rel="noopener noreferrer"
             style={{ color: "black" }}
           >
             <Icon name="github" />
