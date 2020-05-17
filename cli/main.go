@@ -32,6 +32,9 @@ func main() {
 	bech32Regex := regexp.MustCompile(fmt.Sprintf(`%s(pub|valoper|valoperpub|valcons|valconspub)?1[02-9ac-hj-np-z]{6,}\b`, from))
 
 	scanner := bufio.NewScanner(os.Stdin)
+	buf := make([]byte, 64*1024)      // 64KiB initial size
+	scanner.Buffer(buf, 20*1024*1024) // 20MiB max line size
+
 	for scanner.Scan() {
 		line := scanner.Text()
 		oldAddressInLine := bech32Regex.FindAllString(line, -1)
