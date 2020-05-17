@@ -22,5 +22,5 @@ Usage of ./bech32-convert:
 ### Usage
 
 ```console
-$ cat new_genesis.json | ./bech32-convert > ~/.secretd/config/genesis.json
+$ cat exported_genesis.json | ./bech32-convert > ~/.secretd/config/genesis.json
 ```
