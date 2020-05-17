@@ -85,8 +85,11 @@ function convert(input = "", from, to) {
   to = to || "secret";
 
   if (!regexCache[from]) {
+    // https://github.com/bitcoin/bips/blob/master/bip-0173.mediawiki#Bech32
+    // The separator is always "1".
+    // The data part is at least 6 characters long and only consists of alphanumeric characters excluding "1", "b", "i", and "o".
     regexCache[from] = new RegExp(
-      `${from}(pub|valoper|valoperpub|valcons|valconspub)?1[a-z0-9]+\\b`,
+      `${from}(pub|valoper|valoperpub|valcons|valconspub)?1[02-9ac-hj-np-z]{6,}\\b`,
       "g"
     );
   }
