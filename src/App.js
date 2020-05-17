@@ -100,9 +100,9 @@ function convert(input = "", from, to) {
 
   for (const oldAddress of matches) {
     try {
-      const canonical = bech32.decode(oldAddress);
+      const canonical = bech32.decode(oldAddress, 1023);
       const newPrefix = canonical.prefix.replace(from, to);
-      const newAddress = bech32.encode(newPrefix, canonical.words);
+      const newAddress = bech32.encode(newPrefix, canonical.words, 1023);
       output = output.replace(new RegExp(oldAddress, "g"), newAddress);
     } catch (error) {
       output = output
