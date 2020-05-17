@@ -1,2 +1,2 @@
-Mainly an `enigma` to `secret` addresses converter.  
+Mainly an `enigma` to `secret` bech32 addresses converter.  
 https://bech32.enigma.co
