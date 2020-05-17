@@ -9,20 +9,16 @@ import (
 	"regexp"
 	"strings"
 
-	"github.com/roasbeef/btcutil/bech32"
+	"github.com/enigmampc/btcutil/bech32"
 )
 
-var from string
-var to string
-
-func init() {
+func main() {
+	var from string
+	var to string
 	flag.StringVar(&from, "from", "enigma", "from prefix")
 	flag.StringVar(&to, "to", "secret", "to prefix")
-
 	flag.Parse()
-}
 
-func main() {
 	fi, _ := os.Stdin.Stat()
 
 	if (fi.Mode() & os.ModeCharDevice) != 0 {
@@ -40,7 +36,7 @@ func main() {
 		oldAddressInLine := bech32Regex.FindAllString(line, -1)
 
 		for _, oldAddress := range oldAddressInLine {
-			prefix, canonical, err := bech32.Decode(oldAddress)
+			prefix, canonical, err := bech32.Decode(oldAddress, 1023)
 			if err != nil {
 				log.Printf(`Error parsing "%v" as bech32 address: %v`, oldAddress, err)
 				continue
