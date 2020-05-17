@@ -66,7 +66,7 @@ class App extends React.Component {
           Made with <Icon style={{ color: "red" }} name="heart" />
           by Team Enigma{" "}
           <a
-            href="https://github.com/enigmampc/Bech32Converter"
+            href="https://github.com/enigmampc/bech32.enigma.co"
             target="_blank"
             rel="noopener noreferrer"
             style={{ color: "black" }}
