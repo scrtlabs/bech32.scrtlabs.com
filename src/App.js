@@ -22,7 +22,7 @@ class App extends React.Component {
         <Form style={{ display: "flex", height: "4em" }}>
           <Input
             value={this.state.from}
-            placeholder="from: enigma"
+            placeholder="convert from prefix: enigma"
             style={{ padding: "0.4%", flex: 1 }}
             onChange={(_, { value }) =>
               this.setState({ from: value.toLowerCase() })
@@ -30,7 +30,7 @@ class App extends React.Component {
           />
           <Input
             value={this.state.to}
-            placeholder="to: secret"
+            placeholder="convert to prefix: secret"
             style={{ padding: "0.4%", flex: 1 }}
             onChange={(_, { value }) =>
               this.setState({ to: value.toLowerCase() })
@@ -122,32 +122,36 @@ function getPlaceholder(from) {
   from = from || "enigma";
 
   try {
-    return JSON.stringify(
-      {
-        wallet: bech32.encode(
-          from,
-          bech32.decode("enigma1pnsceh64jyrsfwjd2k865eetmsgg5grw8sma87").words
-        ),
-        valoper: bech32.encode(
-          `${from}valoper`,
-          bech32.decode("enigmavaloper1qx5pppsfrqwlnmxj7prpx8rysxm2u5vzqwv3ly")
-            .words
-        ),
-        pub: bech32.encode(
-          `${from}pub`,
-          bech32.decode(
-            "enigmapub1addwnpepqgauy23vhvvr8uezgczuzh7lj64r9ahd4vsshz5fksezk5lw5k6swjskux6"
-          ).words
-        ),
-        valconspub: bech32.encode(
-          `${from}valconspub`,
-          bech32.decode(
-            "enigmavalconspub1zcjduepqj7ygd0gulz2qa03hgzf3ye40pmeyen2z64xjvpkw8mfhuu7j2vcqk6lgcu"
-          ).words
-        ),
-      },
-      null,
-      4
+    return (
+      `Paste any text you want on the left side and it will be shown converted on the right side, for example:\n` +
+      JSON.stringify(
+        {
+          wallet: bech32.encode(
+            from,
+            bech32.decode("enigma1pnsceh64jyrsfwjd2k865eetmsgg5grw8sma87").words
+          ),
+          valoper: bech32.encode(
+            `${from}valoper`,
+            bech32.decode(
+              "enigmavaloper1qx5pppsfrqwlnmxj7prpx8rysxm2u5vzqwv3ly"
+            ).words
+          ),
+          pub: bech32.encode(
+            `${from}pub`,
+            bech32.decode(
+              "enigmapub1addwnpepqgauy23vhvvr8uezgczuzh7lj64r9ahd4vsshz5fksezk5lw5k6swjskux6"
+            ).words
+          ),
+          valconspub: bech32.encode(
+            `${from}valconspub`,
+            bech32.decode(
+              "enigmavalconspub1zcjduepqj7ygd0gulz2qa03hgzf3ye40pmeyen2z64xjvpkw8mfhuu7j2vcqk6lgcu"
+            ).words
+          ),
+        },
+        null,
+        4
+      )
     );
   } catch (err) {
     return err.message;
