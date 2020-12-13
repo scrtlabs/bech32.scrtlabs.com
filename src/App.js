@@ -1,82 +1,69 @@
-import React from "react";
+import React, { useState } from "react";
 import { Form, TextArea, Input, Icon } from "semantic-ui-react";
 import bech32 from "bech32";
 
 import "semantic-ui-css/semantic.min.css";
 import "./App.css";
 
-class App extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      input: "",
-      from: "",
-      to: "",
-    };
-  }
+function App() {
+  const [input, setInput] = useState("");
+  const [from, setFrom] = useState("");
+  const [to, setTo] = useState("");
 
-  render() {
-    const placeholder = getPlaceholder(this.state.from);
-    return (
-      <div>
-        <Form style={{ display: "flex", height: "4em" }}>
-          <Input
-            value={this.state.from}
-            placeholder="convert from prefix: enigma"
-            style={{ padding: "0.4%", flex: 1 }}
-            onChange={(_, { value }) =>
-              this.setState({ from: value.toLowerCase() })
-            }
-          />
-          <Input
-            value={this.state.to}
-            placeholder="convert to prefix: secret"
-            style={{ padding: "0.4%", flex: 1 }}
-            onChange={(_, { value }) =>
-              this.setState({ to: value.toLowerCase() })
-            }
-          />
-        </Form>
-        <Form
-          style={{ display: "flex", height: "calc(100vh - (4em + 1.35em))" }}
+  const placeholder = getPlaceholder(from);
+  return (
+    <div>
+      <Form style={{ display: "flex", height: "4em" }}>
+        <Input
+          value={from}
+          placeholder="convert from prefix: enigma"
+          style={{ padding: "0.4%", flex: 1 }}
+          onChange={(_, { value }) => setFrom(value.toLowerCase())}
+        />
+        <Input
+          value={to}
+          placeholder="convert to prefix: secret"
+          style={{ padding: "0.4%", flex: 1 }}
+          onChange={(_, { value }) => setTo(value.toLowerCase())}
+        />
+      </Form>
+      <Form style={{ display: "flex", height: "calc(100vh - (4em + 1.35em))" }}>
+        <TextArea
+          onChange={(_, { value }) => setInput(value)}
+          placeholder={placeholder}
+          style={{ margin: "0.2% 0.4% 0.6% 0.4%", resize: "none" }}
+        />
+        <TextArea
+          value={convert(input, from, to)}
+          placeholder={convert(placeholder, from, to)}
+          style={{ margin: "0.2% 0.4% 0.6% 0.4%", resize: "none" }}
+        />
+      </Form>
+      <div
+        style={{
+          height: "1.35em",
+          width: "100%",
+          backgroundColor: "#e7e7e7",
+          color: "black",
+          textAlign: "center",
+          position: "fixed",
+          left: 0,
+          bottom: 0,
+        }}
+      >
+        Made with <Icon style={{ color: "red" }} name="heart" />
+        by Team Enigma{" "}
+        <a
+          href="https://github.com/enigmampc/bech32.enigma.co"
+          target="_blank"
+          rel="noopener noreferrer"
+          style={{ color: "black" }}
         >
-          <TextArea
-            onChange={(_, { value }) => this.setState({ input: value })}
-            placeholder={placeholder}
-            style={{ margin: "0.2% 0.4% 0.6% 0.4%", resize: "none" }}
-          />
-          <TextArea
-            value={convert(this.state.input, this.state.from, this.state.to)}
-            placeholder={convert(placeholder, this.state.from, this.state.to)}
-            style={{ margin: "0.2% 0.4% 0.6% 0.4%", resize: "none" }}
-          />
-        </Form>
-        <div
-          style={{
-            height: "1.35em",
-            width: "100%",
-            backgroundColor: "#e7e7e7",
-            color: "black",
-            textAlign: "center",
-            position: "fixed",
-            left: 0,
-            bottom: 0,
-          }}
-        >
-          Made with <Icon style={{ color: "red" }} name="heart" />
-          by Team Enigma{" "}
-          <a
-            href="https://github.com/enigmampc/bech32.enigma.co"
-            target="_blank"
-            rel="noopener noreferrer"
-            style={{ color: "black" }}
-          >
-            <Icon name="github" />
-          </a>
-        </div>
+          <Icon name="github" />
+        </a>
       </div>
-    );
-  }
+    </div>
+  );
 }
 
 const regexCache = {};
