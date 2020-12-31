@@ -24,3 +24,7 @@ yarn-error.log*
 
 bech32-convert
 .eslintcache
+
+.cache
+.vscode
+dist
